@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediCare Pro</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<!-- WELCOME PAGE -->
+<div class="welcome-page" id="welcomePage">
+    <div class="welcome-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966487.png" class="logo">
+        <h1>MediCare</h1>
+        <p>Let’s Begin Your Fitness Check</p>
+        <button onclick="goToLogin()">Get Started</button>
+    </div>
+</div>
+
+
+<div id="botPanel">
+    <div class="botHeader">
+        🤖 MediCare Guide
+        <span onclick="toggleBot()">✖</span>
+    </div>
+    <div class="botContent" id="botText"></div>
+</div>
+
+<!-- LOGIN PAGE (UPDATED PROFESSIONAL UI) -->
+<div class="login-container" id="loginPage">
+    <div class="login-card">
+
+        <div class="brand">
+            <div class="logo-box">+</div>
+            <h3>HHCARE MONITOR</h3>
+        </div>
+
+        <h1>Smart patient<br>monitoring</h1>
+
+        <p class="subtitle">
+            Login to view live SpO2, temperature, heart rate, ECG trend, AI alert status, emergency hospitals, and doctor contact options.
+        </p>
+
+        <label>Email</label>
+        <input type="text" id="username" placeholder="Enter Firebase email">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter Firebase password">
+
+        <button onclick="login()">Login</button>
+
+        <p class="note">
+            Use the Email/Password account you created in Firebase Authentication.
+        </p>
+
+    </div>
+</div>
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+    <div id="alertBox" class="alert-box"></div>
+
+    <h1>Health Dashboard</h1>
+
+    <div class="metrics">
+        <div class="card">
+            <h2 id="heartRate">72</h2>
+            <p>Heart Rate</p>
+        </div>
+        <div class="card">
+            <h2 id="spo2">98</h2>
+            <p>SpO2</p>
+        </div>
+        <div class="card">
+            <h2 id="temperature">98.6</h2>
+            <p>Temperature</p>
+        </div>
+    </div>
+
+   <div class="ecg-container">
+    <canvas id="ecgChart"></canvas>
+</div>
+
+    <!-- Doctors & Hospitals Scrollable Section -->
+    <div class="info-scroll-container">
+        <!-- Doctors -->
+        <div class="column">
+            <h3>Doctors</h3>
+            <div class="info">
+                <p>Dr. Rajesh Kumar</p>
+                <button onclick="callSkype('+918792007229')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007229')">💬 WhatsApp</button>
+            </div>
+            <div class="info">
+                <p>Dr. Anjali Mehta</p>
+                <button onclick="callSkype('+918792007230')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007230')">💬 WhatsApp</button>
+            </div>
+            <div class="info">
+                <p>Dr. Sunil Rao</p>
+                <button onclick="callSkype('+918792007231')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007231')">💬 WhatsApp</button>
+            </div>
+            <div class="info">
+                <p>Dr. Kavita Singh</p>
+                <button onclick="callSkype('+918792007232')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007232')">💬 WhatsApp</button>
+            </div>
+        </div>
+
+        <!-- Hospitals -->
+        <div class="column">
+            <h3>Hospitals</h3>
+            <div class="info">
+                <p>MediCare Hospital, Bangalore</p>
+                <button onclick="callSkype('+918792007229')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007229')">💬 WhatsApp</button>
+                <button onclick="openHospitalMap('MediCare Hospital, Bangalore')">🗺️ Map</button>
+            </div>
+            <div class="info">
+                <p>Sunshine Hospital, Bangalore</p>
+                <button onclick="callSkype('+918792007230')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007230')">💬 WhatsApp</button>
+                <button onclick="openHospitalMap('Sunshine Hospital, Bangalore')">🗺️ Map</button>
+            </div>
+            <div class="info">
+                <p>City Hospital, Bangalore</p>
+                <button onclick="callSkype('+918792007231')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007231')">💬 WhatsApp</button>
+                <button onclick="openHospitalMap('City Hospital, Bangalore')">🗺️ Map</button>
+            </div>
+            <div class="info">
+                <p>Fortis Hospital, Bangalore</p>
+                <button onclick="callSkype('+918792007232')">📞 Skype Call</button>
+                <button onclick="contactWhatsApp('+918792007232')">💬 WhatsApp</button>
+                <button onclick="openHospitalMap('Fortis Hospital, Bangalore')">🗺️ Map</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<script src="script.js"></script>
+<div id="animeBot">
+    <img src="roboot.gif" id="botGif">
+</div>
+
+<div id="botPanel">
+    <div class="botHeader">
+        🤖 MediCare Guide
+        <span onclick="toggleBot()">✖</span>
+    </div>
+    <div class="botContent" id="botText"></div>
+</div>
+<button class="emergency-btn" onclick="callEmergency()">
+    🚨 Call Emergency (108)
+</button>
+</body>
+</html>
